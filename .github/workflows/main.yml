@@ -20,12 +20,15 @@ jobs:
           node-version: 20
 
       - name: Install dependencies
+        working-directory: ./backstage-training
         run: yarn install
 
       - name: Build backend bundle
-        run: yarn build:backend --config app-config.yaml --config app-config.production.yaml
+        working-directory: ./backstage-training
+        run: yarn build:backend 
 
       - name: Archive backend bundle
+        working-directory: ./backstage-training
         run: |
           mkdir -p packages/backend/dist
           tar -czf packages/backend/dist/bundle.tar.gz \

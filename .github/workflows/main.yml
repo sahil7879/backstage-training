@@ -14,7 +14,25 @@ jobs:
         shell: bash
         run: |
           echo "COMMIT_ID=${GITHUB_SHA::6}" >> "$GITHUB_ENV"
-           
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Build backend bundle
+        run: yarn build:backend --config app-config.yaml --config app-config.production.yaml
+
+      - name: Archive backend bundle
+        run: |
+          mkdir -p packages/backend/dist
+          tar -czf packages/backend/dist/bundle.tar.gz \
+            packages/backend dist \
+            app-config.yaml app-config.production.yaml \
+            yarn.lock package.json
+            
       - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:

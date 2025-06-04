@@ -3,7 +3,7 @@ name: backstage-cicd
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   ci:
@@ -25,6 +25,6 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           push: true
-          tags: sahiljangra/flasktime:${{ env.COMMIT_ID }}
+          tags: sahiljangra/backstageapp:${{ env.COMMIT_ID }}
     outputs:
       commit_id: ${{ env.COMMIT_ID }}

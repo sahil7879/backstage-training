@@ -20,14 +20,8 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 20
-      - name: pwd
-        run: ls -a
-      - name: Install dependencies
-        
-        run: yarn install
 
       - name: Build backend bundle
-        
         run: yarn build:backend 
 
       - name: Archive backend bundle
